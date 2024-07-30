@@ -80,11 +80,11 @@
 
 <body>
 	<div align="center">
-							<h1 class="heading">Ekstrakurikuler MTsN 2 Palangka Raya </h1>
+							<h1 class="heading">SMK NEGERI 3 PADANGSIDIMPUAN</h1>
 						
 						</div>
 						<div class="header">
-								<div class="logo text-center"><img src="assets/img/images.jpeg" alt="Logo SMAN 1 Tempuran" width="100" height="100"></div>
+								<div class="logo text-center"><img src="assets/img/logosmk.png" alt="SMK NEGERI 3 PADANGSIDIMPUAN" width="100" height="100"></div>
 								
 							</div>
 <div align="center">
