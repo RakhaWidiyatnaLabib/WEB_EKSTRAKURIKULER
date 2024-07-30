@@ -22,21 +22,23 @@
                         <table class="display" id="data">
                             <thead>
                                 <tr>
-                                    <th width="220px">ID Ekstrakurikuler</th>
+                                    <th width="120px">ID Ekskul</th>
                                     <th width="220px">Nama Ekstrakurikuler</th>
-                                    <th width="220px">Jadwal</th>
-                                    <th width="450px">Pembina</th>
+                                    <th width="220px">Hari</th>
+                                    <th width="220px">Jam</th>
+                                    <th width="220px">Pembina</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($set as $row) { ?>
                                     <tr>
-                                        <td></td>
+                                        <td><?php echo $row->id_ekskul; ?></td>
                                         <td><?php echo $row->nama_ekskul; ?> </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
+                                        <td><?php echo $row->hari; ?></td>
+                                        <td><?php echo $row->jam_mulai; ?> - <?php echo $row->jam_selesai; ?></td>
+                                        <td><?php echo $row->pembina; ?></td>
+                                        <td >
                                             <button class="btn btn-warning" onclick="edit_supplier(<?php echo $row->id_ekskul; ?>)"><i class="fa fa-edit"></i> Ubah</button>
 
                                             <?php echo anchor('ekskul/destroy/' . $row->id_ekskul, '<button class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>');
@@ -126,16 +128,15 @@
             <div class="modal-body">
                 <?php echo form_open('ekskul/create', array('id' => 'form')); ?>
 
-
                 <input type="hidden" name="id_ekskul" />
 
-                <div class="form-group" id="pengguna">
+                <div class="form-group">
                     <label>Nama Ekstrakurikuler</label>
                     <input type="text" name="nama_ekskul" class="form-control">
                 </div>
 
-                <div class="form-group" id="email">
-                    <label>Jadwal</label>
+                <div class="form-group">
+                    <label>Hari</label>
                     <select name="hari" class="form-control">
                         <option value="senin">Senin</option>
                         <option value="selasa">Selasa</option>
@@ -147,11 +148,22 @@
                     </select>
                 </div>
 
-                <div class="form-group" id="email">
+                <div class="form-group">
+                    <label>Jam Dimulai</label>
+                    <input type="time" name="jam_dimulai" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Jam Selesai</label>
+                    <input type="time" name="jam_selesai" class="form-control">
+                </div>
+
+                <div class="form-group">
                     <label>Pembina</label>
                     <select name="penanggung_jawab" class="form-control">
-                        <option value="senin">Pembina 1</option>
-                        <option value="selasa">Pembina 2</option>
+                    <?php foreach ($pembina as $row) { ?>
+                        <option value="<?php echo $row->nama; ?>"><?php echo $row->nama; ?></option>
+                    <?php }?> 
                     </select>
                 </div>
 
@@ -160,8 +172,8 @@
                     <?php echo form_close(); ?>
                 </div>
             </div>
-
         </div>
+
 
     </div>
 </div>

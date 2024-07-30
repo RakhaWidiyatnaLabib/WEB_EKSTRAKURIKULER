@@ -116,6 +116,7 @@ $data['dtbidang'] = $this->crud->admin_dtbidang();
              'set' => $this->crud->joinsiswa()->result(),
             'set_siswa' => $this->crud->all('siswa')->result()
         );
+        
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
         $this->load->view('admin/pengguna/kelola',$data);
@@ -123,10 +124,10 @@ $data['dtbidang'] = $this->crud->admin_dtbidang();
     }
 
     function ekskul(){
+
         $data = array(
             'set' => $this->crud->all('ekskul')->result(),
-
-
+            'pembina' => $this->crud->all('pembina')->result(),
         );
 
         $this->load->view('layouts/header');

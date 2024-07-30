@@ -32,8 +32,14 @@ class UserModel extends CI_Model {
         $this->db->where('role !=','1');
         return $this->db->get('user');
     }
-    
-     function reset($id){
+
+    public function get_all_pembina()
+    {
+        $query = $this->db->get('pembina');
+        return $query->result();
+    }    
+     
+    function reset($id){
         $this->db->select('*');
         $this->db->where('id_user',$id);
         $result = $this->db->get('user')->result();
