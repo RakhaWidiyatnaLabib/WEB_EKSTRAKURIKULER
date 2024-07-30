@@ -7,7 +7,7 @@
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="brand">
-                <a href="#"><b>SIE-MTsN2</b></a>
+                <a href="#"><b>WEBSITE PENDAFTARAN EKSKUL</b></a>
             </div>
             <div class="container-fluid">
 

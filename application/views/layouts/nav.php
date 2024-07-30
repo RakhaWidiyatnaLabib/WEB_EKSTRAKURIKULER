@@ -3,7 +3,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="#"><b>SIE-MTsN2</b></a>
+				<a href="#"><b>ADMIN ONLY</b></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -46,32 +46,29 @@
 			</div>
 		</nav>
 		
-	<!-- LEFT SIDEBAR -->
-		<div id="sidebar-nav" class="sidebar">
-			<div class="sidebar-scroll">
-					<ul class="nav">
-                        <?php if($this->session->userdata('role') == 1){ ?>
-                        	<center>
-					    	<img src="<?php echo base_url();?>assets/img/images.jpeg" alt="Logo SMAN 1 Tempuran" width="100" height="100"></center>
-						<li><a href="<?php echo site_url('admin');?>" > <span>Dashboard</span></a></li>
-						<li><a href="<?php echo site_url('admin/ekskul');?>" ><span>Data Ekstrakurikuler</span></a></li>
-						<li><a href="<?php echo site_url('admin/siswa');?>" ><span>Data Siswa</span></a></li>
-
-						<li><a href="<?php echo site_url('admin/pengguna');?>" > <span>Data Pendaftar</span></a></li>
-						<!--<li><a href="<?php echo site_url('admin/penjadwalan');?>" ><span>Penjadwalan</span></a></li>-->
-						<li><a href="<?php echo site_url('admin/pengumuman');?>" ><span>Pengumuman</span></a></li>
-						<li><a href="<?php echo site_url('admin/laporan');?>" ><span>Laporan</span></a></li>
-						<li><a href="<?php echo site_url('admin/pengguna');?>" ><span>Data Admin</span></a></li>
-<li><a href="<?php echo base_url('login/signout');?>"><span>Logout</span></a></li>
-                        <?php } else { ?>
-                            
-                            <li><a href="<?php echo site_url('user/register');?>"><span>Registrasi Ekskul</span></a></li>
-                           	<li><a href="<?php echo site_url('user/galeri');?>"><span>Galeri Ekstrakurikuler</span></a></li>
-
-<li><a href="<?php echo base_url('login/signout');?>"><span>Logout</span></a></li>
-                            
-                        <?php } ?>
-					</ul>
-			</div>
-		</div>
-		<!-- END LEFT SIDEBAR -->
+<!-- LEFT SIDEBAR -->
+<div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+        <ul class="nav">
+            <?php if($this->session->userdata('role') == 1){ ?>
+                <center>
+                    <img src="<?php echo base_url();?>assets/img/logosmk.png" alt="Logo SMKN3" width="100" height="111" style="padding-top: 20px;">
+                </center>
+                <li><a href="<?php echo site_url('admin');?>" > <span>Dashboard</span></a></li>
+                <li><a href="<?php echo site_url('admin/ekskul');?>" ><span>Data Ekstrakurikuler</span></a></li>
+                <li><a href="<?php echo site_url('admin/siswa');?>" ><span>Data Siswa</span></a></li>
+                <li><a href="<?php echo site_url('admin/pengguna');?>" > <span>Data Pendaftar</span></a></li>
+                <!--<li><a href="<?php echo site_url('admin/penjadwalan');?>" ><span>Penjadwalan</span></a></li>-->
+                <li><a href="<?php echo site_url('admin/pengumuman');?>" ><span>Pengumuman</span></a></li>
+                <li><a href="<?php echo site_url('admin/laporan');?>" ><span>Laporan</span></a></li>
+                <li><a href="<?php echo site_url('admin/pengguna');?>" ><span>Data Admin</span></a></li>
+                <li><a href="<?php echo base_url('login/signout');?>"><span>Logout</span></a></li>
+            <?php } else { ?>
+                <li><a href="<?php echo site_url('user/register');?>"><span>Registrasi Ekskul</span></a></li>
+                <li><a href="<?php echo site_url('user/galeri');?>"><span>Galeri Ekstrakurikuler</span></a></li>
+                <li><a href="<?php echo base_url('login/signout');?>"><span>Logout</span></a></li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
+<!-- END LEFT SIDEBAR -->

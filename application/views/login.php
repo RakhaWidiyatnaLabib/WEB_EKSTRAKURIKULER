@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Sisfo Ekstrakurikuler MTsN 2 Palangka Raya</title>
+	<title>Website Pendaftaran Ekstrakurikuler SMKN 3 PADANGSIDIMPUAN</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.timepicker.min.css');?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/dropzone.css');?>">
 
-	<link rel=" icon" href="<?php echo base_url('assets/img/images.jpeg');?>">
+	<link rel=" icon" href="<?php echo base_url('assets/img/logosmk.png');?>">
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
