@@ -113,8 +113,7 @@ $data['dtbidang'] = $this->crud->admin_dtbidang();
 
     function pengguna(){
         $data = array(
-             'set' => $this->crud->joinsiswa()->result(),
-            'set_siswa' => $this->crud->all('siswa')->result()
+            'set' => $this->crud->all('pembina')->result(),
         );
         
         $this->load->view('layouts/header');
