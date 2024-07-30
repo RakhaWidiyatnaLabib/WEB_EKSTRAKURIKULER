@@ -52,12 +52,12 @@
 			<ul class="nav">
 				<?php if ($this->session->userdata('role') == 1) { ?>
 					<center>
-						<img src="<?php echo base_url(); ?>assets/img/images.jpeg" alt="Logo SMAN 1 Tempuran" width="100" height="100">
+						<img src="<?php echo base_url(); ?>assets/img/images.jpeg" alt="Logo SMAN 1 Tempuran" width="100" height="100" style="margin-bottom: 30px;">
 					</center>
 
 					<li>
 						<a href="<?php echo site_url('admin');  ?>" class="<?php echo $this->uri->segment(2) == '' ? 'active open' : ''; ?>">
-							<span>Dashboard</span>
+							<span>Beranda</span>
 						</a>
 					</li>
 					<li>
@@ -65,29 +65,31 @@
 							<span>Data Ekstrakurikuler</span>
 						</a>
 					</li>
-					<li>
-						<a href="<?php echo site_url('admin/siswa'); ?>" class="<?php echo $this->uri->segment(2) == 'siswa' ? 'active open' : ''; ?>">
-							<span>Data Siswa</span>
-						</a>
-					</li>
 
 					<li>
 						<a href="<?php echo site_url('admin/pengguna'); ?>" class="<?php echo $this->uri->segment(2) == 'pengguna' ? 'active open' : ''; ?>">
-							<span>Data Pendaftar</span>
+							<span>Daftar Pembina</span>
 						</a>
 					</li>
 
+					<li>
+						<a href="<?php echo site_url('admin/siswa'); ?>" class="<?php echo $this->uri->segment(2) == 'siswa' ? 'active open' : ''; ?>">
+							<span>Data Anggota</span>
+						</a>
+					</li>
+
+					
+
 					<!--<li><a href="<?php echo site_url('admin/penjadwalan'); ?>" ><span>Penjadwalan</span></a></li>-->
-					<li><a href="<?php echo site_url('admin/pengumuman'); ?>"><span>Pengumuman</span></a></li>
+					<!-- <li><a href="<?php echo site_url('admin/pengumuman'); ?>"><span>Pengumuman</span></a></li>
 					<li><a href="<?php echo site_url('admin/laporan'); ?>"><span>Laporan</span></a></li>
-					<li><a href="<?php echo site_url('admin/pengguna'); ?>"><span>Data Admin</span></a></li>
+					<li><a href="<?php echo site_url('admin/pengguna'); ?>"><span>Data Admin</span></a></li> -->
 					<li><a href="<?php echo base_url('login/signout'); ?>"><span>Logout</span></a></li>
 				<?php } else { ?>
 
 					<li><a href="<?php echo site_url('user/register'); ?>"><span>Registrasi Ekskul</span></a></li>
 					<li><a href="<?php echo site_url('user/galeri'); ?>"><span>Galeri Ekstrakurikuler</span></a></li>
 
-					<li><a href="<?php echo base_url('login/signout'); ?>"><span>Logout</span></a></li>
 
 				<?php } ?>
 			</ul>
