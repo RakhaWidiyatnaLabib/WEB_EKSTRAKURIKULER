@@ -28,24 +28,29 @@ class Admin extends CI_Controller
 
     function index()
     {
-
+        // Ambil data siswa dan hitung jumlah siswa per ekskul
+        $this->db->select('ekskul, COUNT(*) as total');
+        $this->db->group_by('ekskul');
+        $eks_siswa = $this->db->get('siswa')->result();
 
         $data = array(
             'set_siswa' => $this->crud->count_table('siswa'),
+            'set_ekskul' => $this->crud->count_table('ekskul'),
+            'eks_siswa' => $eks_siswa,  // Data ekskul dengan jumlah pendaftar
+
             'png' => $this->crud->all('pengumuman')->result(),
             'set_ekskul' => $this->crud->count_table('ekskul'),
             'set_akun' => $this->crud->count_table('user'),
             'set_pendaftar' => $this->crud->count_table('registrasi'),
-            'total_asset' => $this->crud->hitungJumlahAsset(),
-            'eks' => $this->crud->all('ekskul')->result()
+            'total_asset' => $this->crud->hitungJumlahAsset()
         );
-
 
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
         $this->load->view('admin/dashboard', $data);
         $this->load->view('layouts/footer');
     }
+
 
     function siswa()
     {

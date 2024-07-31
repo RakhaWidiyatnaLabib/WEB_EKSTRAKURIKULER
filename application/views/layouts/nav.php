@@ -78,7 +78,7 @@
 						</a>
 					</li>
 
-					
+
 
 					<!--<li><a href="<?php echo site_url('admin/penjadwalan'); ?>" ><span>Penjadwalan</span></a></li>-->
 					<!-- <li><a href="<?php echo site_url('admin/pengumuman'); ?>"><span>Pengumuman</span></a></li>

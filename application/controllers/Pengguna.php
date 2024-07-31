@@ -1,5 +1,5 @@
 <?php
-if(defined('basepath')) exit ('No direct access script allowed');
+if (defined('basepath')) exit('No direct access script allowed');
 
 class Pengguna extends CI_Controller{
     
@@ -18,24 +18,19 @@ class Pengguna extends CI_Controller{
         $this->validation();
         if($this->form_validation->run() == FALSE){
             $this->message = "Komponen Pembina Wajib Diisi !";
-            $this->session->set_flashdata('warning',$this->message);            
+            $this->session->set_flashdata('warning', $this->message);            
             redirect('admin/pengguna');
         } else {
             $query = array(
                 'nama' => $this->input->post('nama'),
                 'jabatan' => $this->input->post('jabatan'),
             );
-            $this->crud->insert('pembina',$query);
+            $this->crud->insert('pembina', $query);
             $this->message = "Pembina Baru Berhasil Disimpan :)";
-            $this->session->set_flashdata('success',$this->message);
+            $this->session->set_flashdata('success', $this->message);
             redirect('admin/pengguna');
         }
     }
-    
-    public function get($id) {
-        $result = $this->crud->get('pembina', array('id_pembina' => $id))->row();
-        echo json_encode($result ?: array('error' => 'Data not found'));
-    }    
     
     public function update() {
         $this->validation();
@@ -60,7 +55,7 @@ class Pengguna extends CI_Controller{
     }
     
     function validation(){
-        $this->form_validation->set_rules('nama','','required');
-        $this->form_validation->set_rules('jabatan','','required');   
+        $this->form_validation->set_rules('nama', '', 'required');
+        $this->form_validation->set_rules('jabatan', '', 'required');
     }
 }

@@ -42,39 +42,48 @@ class User extends CI_Controller {
         }
     }
 
-    function create(){
+    public function create(){
         $this->validation();
         if($this->form_validation->run() == FALSE){
-
             $this->message = "Komponen Siswa Wajib Diisi !";
-            $this->session->set_flashdata('warning',$this->message);            
-            redirect('user/pendaftaran');
-
+            $this->session->set_flashdata('warning', $this->message);            
+            redirect('user/register');
         } else {
-
             $query = array(
-                'nis' => $this->input->post('nis'),
-                'nama_siswa' => $this->input->post('nama_siswa'),
-                'rombel' => $this->input->post('rombel'),
-                'tanggal_daftar' => $this->input->post('tanggal_daftar'),
-                'kelas' => $this->input->post('kelas')
+                'nisn' => $this->input->post('nisn'),
+                'nama' => $this->input->post('nama'),
+                'kelas' => $this->input->post('kelas'),
+                'alamat' => $this->input->post('alamat'),
+                'agama' => $this->input->post('agama'),
+                'ekskul' => $this->input->post('ekskul'),
+                'rombel' => 10,
+                'jenis_kelamin' => $this->input->post('Jenis_kelamin'),
+                'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+                'tempat_lahir' => $this->input->post('tempat_lahir'),
             );
-            $this->crud->insert('siswa',$query);
-            $this->message = "Data Siswa Berhasil Disimpan !";
-            $this->session->set_flashdata('success',$this->message);            
-            redirect('user/pendaftaran');
 
+            if($this->crud->insert('siswa', $query)){
+                $this->message = "Data Siswa Berhasil Disimpan !";
+                $this->session->set_flashdata('success', $this->message);            
+            } else {
+                $this->message = "Gagal menyimpan data siswa!";
+                $this->session->set_flashdata('error', $this->message);
+            }
+            redirect('user/register');
         }
-        
-
     }
+    
 
     function validation(){
-        $this->form_validation->set_rules('nis','','required');
-        $this->form_validation->set_rules('nama_siswa','','required');
-        $this->form_validation->set_rules('kelas','','required');
-        $this->form_validation->set_rules('rombel','','required');
-        $this->form_validation->set_rules('tanggal_daftar','','required');
+        $this->form_validation->set_rules('nisn','NISN','required');
+        $this->form_validation->set_rules('nama','Nama','required');
+        $this->form_validation->set_rules('kelas','Kelas','required');
+        $this->form_validation->set_rules('alamat','Alamat','required');
+        $this->form_validation->set_rules('agama','Agama','required');
+        $this->form_validation->set_rules('ekskul','Ekstrakurikuler','required');
+        $this->form_validation->set_rules('Jenis_kelamin','Jenis Kelamin','required');
+        $this->form_validation->set_rules('tanggal_lahir','Tanggal Lahir','required');
+        $this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required');
     }
     function upas(){
         $this->form_validation->set_rules('id_user','','required');

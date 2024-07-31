@@ -91,13 +91,41 @@
     <div align="center">
         <h5 class="heading">( isi username dan password anda )</h5>
     </div>
+    <div class="header">
+        <div class="logo text-center"><img src="assets/img/logosmk.png" alt="SMK NEGERI 3 PADANGSIDIMPUAN" width="100" height="100"></div>
+
+    </div>
+    <div align="center">
+        <h5 class="heading">( isi username dan password anda )</h5>
+    </div>
+
+    
+
+
+    <div id="card">
+        <div id="card-content">
+            <center><?php echo $this->session->flashdata('notify'); ?></center>
+            <div id="card-title">
+
+
+                <?php echo form_open('login/signin', array('class' => 'form-auth-small')); ?>
+
+                <div class="form-group">
+                    <label for="signin-email" class="control-label sr-only">Username</label>
+                    <input type="text" class="form-control" id="signin-email" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="signin-password" class="control-label sr-only">Password</label>
+                    <input type="password" class="form-control" id="signin-password" name="password" placeholder="Password">
+                </div>
+
+                <input type="submit" name="submit" class="btn btn-primary btn-lg btn-block" value="Login">
 
     <div id="card">
         <div id="card-content">
             <center><?php echo $this->session->flashdata('notify'); ?></center>
             <div id="card-title">
                 <?php echo form_open('login/signin', array('class' => 'form-auth-small')); ?>
-
                 <div class="form-group">
                     <label for="signin-email" class="control-label sr-only">Username</label>
                     <input type="text" class="form-control" id="signin-email" name="username" placeholder="Username">

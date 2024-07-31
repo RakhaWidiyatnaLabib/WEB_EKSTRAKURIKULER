@@ -36,20 +36,13 @@ class Siswa extends CI_Controller {
         }
     }
 
-    function get($id){
-        $query = array('id_siswa' => $id);
-        $result = $this->crud->get('siswa', $query)->row();
-        echo json_encode($result);
-    }
-
     function update(){
         $query = array(
-            'nis' => $this->input->post('nis'),
-            'nama_siswa' => $this->input->post('nama_siswa'),
+            'nisn' => $this->input->post('nisn'),
+            'nama' => $this->input->post('nama'),
             'tempat_lahir' => $this->input->post('tempat_lahir'),
             'tanggal_lahir' => $this->input->post('tanggal_lahir'),
             'alamat' => $this->input->post('alamat'),
-            'password' => $this->input->post('password'),
             'kelas' => $this->input->post('kelas'),
             'rombel' => $this->input->post('rombel')
         );
@@ -65,7 +58,7 @@ class Siswa extends CI_Controller {
     }
 
     function validation(){
-        $this->form_validation->set_rules('nis', '', 'required');
+        $this->form_validation->set_rules('nisn', '', 'required');
         $this->form_validation->set_rules('nama_siswa', '', 'required');
         $this->form_validation->set_rules('tempat_lahir', '', 'required');
         $this->form_validation->set_rules('tanggal_lahir', '', 'required');
