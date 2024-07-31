@@ -1,207 +1,89 @@
-<?php 
+<?php
 
-if(defined('basepath')) exit ('no direct access script allowed');
+if (defined('basepath')) exit('no direct access script allowed');
 
-class Ekskul extends CI_Controller {
+class Ekskul extends CI_Controller
+{
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
-		$this->load->model('GlobalCrud','crud');
+		$this->load->model('GlobalCrud', 'crud');
 	}
 
-	public function create() {
+	public function create()
+	{
 		$this->validation();
-		
+
 		if ($this->form_validation->run() == FALSE) {
 			$this->message = "Komponen Ekskul Wajib Diisi !";
-			$this->session->set_flashdata('warning', $this->message);            
+			$this->session->set_flashdata('warning', $this->message);
 			redirect('admin/ekskul');
 		} else {
 			// Mengumpulkan data dari form
 			$query = array(
 				'nama_ekskul' => $this->input->post('nama_ekskul'),
-				'pembina' => $this->input->post('penanggung_jawab'),
+				'pembina' => $this->input->post('pembina'),
 				'hari' => $this->input->post('hari'),
 				'jam_mulai' => $this->input->post('jam_dimulai'),
 				'jam_selesai' => $this->input->post('jam_selesai')
 			);
-	
+
 			// Insert data ke tabel ekskul
 			$this->crud->insert('ekskul', $query);
-	
+
 			// Set pesan sukses dan redirect
 			$this->message = "Data Ekskul Berhasil Disimpan !";
-			$this->session->set_flashdata('success', $this->message);            
+			$this->session->set_flashdata('success', $this->message);
 			redirect('admin/ekskul');
 		}
 	}
-	
 
-	function createpenjadwalan(){
+	public function update()
+	{
+		// Validasi input
 		$this->validation();
-		if($this->form_validation->run() == FALSE){
 
-			$this->message = "Komponen Ekskul Wajib Diisi !";
-	        $this->session->set_flashdata('warning',$this->message);            
-	        redirect('admin/penjadwalan');
-
+		// Cek apakah validasi form berhasil
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('warning', "Komponen Ekstrakurikuler Wajib Diisi !");
+			redirect('admin/ekskul');
 		} else {
-
+			// Ambil data dari form
 			$query = array(
 				'nama_ekskul' => $this->input->post('nama_ekskul'),
-				'lokasi' => $this->input->post('lokasi'),
 				'hari' => $this->input->post('hari'),
-				'jam_mulai' => $this->input->post('jam_dimulai'),
+				'jam_mulai' => $this->input->post('jam_dimulai'), // Perhatikan penamaan field di form
 				'jam_selesai' => $this->input->post('jam_selesai'),
-				'pembina' => $this->input->post('penanggung_jawab'),
-				
+				'pembina' => $this->input->post('pembina')
 			);
-			$this->crud->insert('ekskul',$query);
-			$this->message = "Data Ekskul Berhasil Disimpan !";
-	        $this->session->set_flashdata('success',$this->message);            
-	        redirect('admin/penjadwalan');
 
+			// Update data di database
+			$this->crud->update('ekskul', $query, 'id_ekskul', $this->input->post('id_ekskul'));
+
+			// Set pesan sukses
+			$this->message = "Data Ekstrakurikuler Berhasil Diubah !";
+			$this->session->set_flashdata('success', $this->message);
+
+			// Redirect ke halaman eksekul
+			redirect('admin/ekskul');
 		}
-		
-
-	}
-	
-	function createpengumuman(){
-
-		$this->form_validation->set_rules('nama_pengumuman', 'nama_pengumuman', 'required');
-        $this->form_validation->set_rules('isi_pengumuman', 'isi_pengumuman', 'required');
-        
-		if($this->form_validation->run() == FALSE){
-
-			$this->message = "Komponen Pengumuman Wajib Diisi !";
-	        $this->session->set_flashdata('warning',$this->message);            
-	        redirect('admin/pengumuman');
-
-		} else {
-		$nama_pengumuman = $this->input->post('nama_pengumuman');
-		$isi_pengumuman = $this->input->post('isi_pengumuman');
-		
-		$query = array(
-			'nama_pengumuman' => $nama_pengumuman,
-			'isi_pengumuman' => $isi_pengumuman
-			);
-			$this->crud->insert('pengumuman',$query);
-			$this->message = "Data Pengumuman Berhasil Disimpan !";
-	        $this->session->set_flashdata('success',$this->message);     
-		redirect('admin/pengumuman');
-	}
-}
-    
-
-	function get($id){
-		$query = array(
-			'id_ekskul' => $id
-		);
-
-		$result = $this->crud->get('ekskul',$query)->row();
-		echo json_encode($result);
 	}
 
-	function getpenjadwalan($id){
-		$query = array(
-			'id_ekskul' => $id
-		);
-
-		$result = $this->crud->get('ekskul',$query)->row();
-		echo json_encode($result);
-	}
-
-	function getpengumuman($id){
-		$query = array(
-			'id_ekskul' => $id
-		);
-
-		$result = $this->crud->get('pengumuman',$query)->row();
-		echo json_encode($result);
-	}
-
-	function update(){
-		$query = array(
-				'nama_ekskul' => $this->input->post('nama_ekskul'),
-				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
-				'lokasi' => $this->input->post('lokasi'),
-				'hari' => $this->input->post('hari'),
-				'jam_mulai' => $this->input->post('jam_mulai'),
-				'jam_selesai' => $this->input->post('jam_selesai'),
-			);
-		$this->crud->update('ekskul',$query,'id_ekskul',$this->input->post('id_ekskul'));
-		$this->message = "Data Ekskul Berhasil Diubah !";
-        $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/ekskul');
-	}
-
-	function updatepengumuman(){
-		$query = array(
-				'nama_pengumuman' => $this->input->post('nama_pengumuman'),
-				'isi_pengumuman' => $this->input->post('isi_pengumuman'),
-			);
-		$this->crud->update('pengumuman',$query,'id_ekskul',$this->input->post('id_ekskul'));
-		$this->message = "Data Pengumuman Berhasil Diubah !";
-        $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/pengumuman');
-	}
-
-	function destroy($id){
-		$this->crud->delete('ekskul','id_ekskul',$id);
+	function destroy($id)
+	{
+		$this->crud->delete('ekskul', 'id_ekskul', $id);
 		$this->message = "Data Ekskul Berhasil Dihapus !";
-        $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/ekskul');
+		$this->session->set_flashdata('success', $this->message);
+		redirect('admin/ekskul');
 	}
 
-	function destroypengumuman($id){
-		$this->crud->delete('pengumuman','id_ekskul',$id);
-		$this->message = "Data Pengumuman Berhasil Dihapus !";
-        $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/pengumuman');
-	}
-
-	function data_pendaftar($id_ekskul){
-		$data = array(
-			'set' => $this->crud->threeTablesFusionCondition(
-				'registrasi',
-				'ekskul',
-				'siswa',
-				'siswa.id_siswa as id_siswa,
-				 siswa.nama_siswa as nama,
-				 siswa.nis as nis,
-				 siswa.kelas as kelas,
-				 siswa.jurusan as jurusan,
-				 siswa.rombel as rombel,
-				 registrasi.tanggal_daftar as tanggal,
-				 ekskul.id_ekskul as id_ekskul
-				',
-				'ekskul.id_ekskul=registrasi.id_ekskul',
-				'siswa.id_siswa=registrasi.id_siswa',
-				'registrasi.id_ekskul',
-				$id_ekskul)->result()
-
-		);
-
-
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/nav');
-        $this->load->view('admin/ekskul/pendaftar',$data);
-        $this->load->view('layouts/footer');
-	}
-
-	function hapus_pendaftar($id_ekskul,$id_siswa){
-		$this->crud->delete_pendaftar($id_ekskul,$id_siswa);
-		$this->message = "Data Pendaftar Berhasil Dihapus !";
-        $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/ekskul');
-
-	}
-
-	function validation(){
-        $this->form_validation->set_rules('nama_ekskul','','required');
-        $this->form_validation->set_rules('hari','','required');
-        $this->form_validation->set_rules('jam_dimulai','','required');
-		$this->form_validation->set_rules('jam_selesai','','required');
-        $this->form_validation->set_rules('penanggung_jawab','','required');
+	function validation()
+	{
+		$this->form_validation->set_rules('nama_ekskul', 'Nama Ekstrakurikuler', 'required');
+		$this->form_validation->set_rules('hari', 'Hari', 'required');
+		$this->form_validation->set_rules('jam_dimulai', 'Jam Dimulai', 'required');
+		$this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
+		$this->form_validation->set_rules('pembina', 'pembina', 'required');
 	}
 }
