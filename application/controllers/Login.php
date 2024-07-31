@@ -25,9 +25,11 @@ class Login extends CI_Controller {
         
         $result = $this->crud->get('user',$query);
         
-        if($result->num_rows() == 1){
+        if($result->num_rows() == 1)
+        {
             $this->user->session($result);
             $this->session->set_userdata($result);
+            redirect('pendaftaran');
         } else  {
             $this->session->set_flashdata('notify','<font color="red">Username atau Password Salah</font>');
             redirect('login');
