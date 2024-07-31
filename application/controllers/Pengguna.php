@@ -17,21 +17,19 @@ class Pengguna extends CI_Controller{
     function create(){
         $this->validation();
         if($this->form_validation->run() == FALSE){
-            $this->message = "Komponen Pengguna Wajib Diisi !";
+            $this->message = "Komponen Pembina Wajib Diisi !";
             $this->session->set_flashdata('warning',$this->message);            
             redirect('admin/pengguna');
         } else {
             
             $query = array(
                
-                'username' => $this->input->post('username'),
-                'password' => $this->input->post('password'),
-                'id_siswa' => $this->input->post('id_siswa'),
-                'role' => '0'
+                'nama' => $this->input->post('nama'),
+                'jabatan' => $this->input->post('jabatan'),
             );
             
-            $this->crud->insert('user',$query);
-            $this->message = "Pengguna Baru Berhasil Disimpan :)";
+            $this->crud->insert('pembina',$query);
+            $this->message = "Pembina Baru Berhasil Disimpan :)";
             $this->session->set_flashdata('success',$this->message);
             redirect('admin/pengguna');
             
@@ -98,9 +96,8 @@ class Pengguna extends CI_Controller{
     }
     
     function validation(){
-        $this->form_validation->set_rules('username','','required');
-        $this->form_validation->set_rules('password','','required');
-        $this->form_validation->set_rules('id_siswa','','required');
+        $this->form_validation->set_rules('nama','','required');
+        $this->form_validation->set_rules('jabatan','','required');
         
     }
     

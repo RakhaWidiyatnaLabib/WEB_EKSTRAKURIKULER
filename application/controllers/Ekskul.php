@@ -9,34 +9,33 @@ class Ekskul extends CI_Controller {
 		$this->load->model('GlobalCrud','crud');
 	}
 
-	function create(){
+	public function create() {
 		$this->validation();
-		if($this->form_validation->run() == FALSE){
-
+		
+		if ($this->form_validation->run() == FALSE) {
 			$this->message = "Komponen Ekskul Wajib Diisi !";
-	        $this->session->set_flashdata('warning',$this->message);            
-	        redirect('admin/ekskul');
-
+			$this->session->set_flashdata('warning', $this->message);            
+			redirect('admin/ekskul');
 		} else {
-
+			// Mengumpulkan data dari form
 			$query = array(
 				'nama_ekskul' => $this->input->post('nama_ekskul'),
-				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
-				'lokasi' => $this->input->post('lokasi'),
+				'pembina' => $this->input->post('penanggung_jawab'),
 				'hari' => $this->input->post('hari'),
-				'jam_mulai' => $this->input->post('jam_mulai'),
+				'jam_mulai' => $this->input->post('jam_dimulai'),
 				'jam_selesai' => $this->input->post('jam_selesai')
-				
 			);
-			$this->crud->insert('ekskul',$query);
+	
+			// Insert data ke tabel ekskul
+			$this->crud->insert('ekskul', $query);
+	
+			// Set pesan sukses dan redirect
 			$this->message = "Data Ekskul Berhasil Disimpan !";
-	        $this->session->set_flashdata('success',$this->message);            
-	        redirect('admin/ekskul');
-
+			$this->session->set_flashdata('success', $this->message);            
+			redirect('admin/ekskul');
 		}
-		
-
 	}
+	
 
 	function createpenjadwalan(){
 		$this->validation();
@@ -50,11 +49,11 @@ class Ekskul extends CI_Controller {
 
 			$query = array(
 				'nama_ekskul' => $this->input->post('nama_ekskul'),
-				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
 				'lokasi' => $this->input->post('lokasi'),
 				'hari' => $this->input->post('hari'),
-				'jam_mulai' => $this->input->post('jam_mulai'),
-				'jam_selesai' => $this->input->post('jam_selesai')
+				'jam_mulai' => $this->input->post('jam_dimulai'),
+				'jam_selesai' => $this->input->post('jam_selesai'),
+				'pembina' => $this->input->post('penanggung_jawab'),
 				
 			);
 			$this->crud->insert('ekskul',$query);
@@ -200,10 +199,9 @@ class Ekskul extends CI_Controller {
 
 	function validation(){
         $this->form_validation->set_rules('nama_ekskul','','required');
-        $this->form_validation->set_rules('penanggung_jawab','','required');
-        $this->form_validation->set_rules('lokasi','','required');
         $this->form_validation->set_rules('hari','','required');
-        $this->form_validation->set_rules('jam_mulai','','required');
- 		$this->form_validation->set_rules('jam_selesai','','required');
+        $this->form_validation->set_rules('jam_dimulai','','required');
+		$this->form_validation->set_rules('jam_selesai','','required');
+        $this->form_validation->set_rules('penanggung_jawab','','required');
 	}
 }
