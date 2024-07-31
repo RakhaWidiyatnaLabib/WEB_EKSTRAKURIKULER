@@ -39,21 +39,21 @@
                 <tr class="mb-3">
                     <th scope="col">NISN</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">Ekskul</th>
+                    <!-- <th scope="col">Ekskul</th> -->
                     <th scope="col">Kelas</th>
-                    <th scope="col">Tempat Tanggal Lahir</th>
+                    <!-- <th scope="col">Tempat Tanggal Lahir</th>
                     <th scope="col">Agama</th>
-                </tr>
+                </tr> -->
             </thead>
             <tbody>
                 <?php foreach ($siswa as $row): ?>
                     <tr >
                         <td><?php echo $row->nisn; ?></td>
                         <td><?php echo $row->nama; ?></td>
-                        <td><?php echo $row->ekskul; ?></td>
+                        <!-- <td><?php echo $row->ekskul; ?></td> -->
                         <td><?php echo $row->kelas; ?></td>
-                        <td><?php echo $row->tempat_lahir . ' - ' . date_format(date_create($row->tanggal_lahir), "d F Y"); ?></td>
-                        <td><?php echo $row->agama; ?></td>
+                        <!-- <td><?php echo $row->tempat_lahir . ' - ' . date_format(date_create($row->tanggal_lahir), "d F Y"); ?></td>
+                        <td><?php echo $row->agama; ?></td> -->
                     </tr>
                 <?php endforeach; ?>
             </tbody>
