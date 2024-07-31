@@ -2,18 +2,14 @@
     <!-- MAIN CONTENT -->
     <div class="main-content">
         <div class="container-fluid">
-            <?php echo $this->session->flashdata('notify'); ?>
-            <?php echo validation_errors(); ?>
             <!-- OVERVIEW -->
             <div class="panel panel-headline">
                 <div class="panel-heading">
                     <h3 class="panel-title">Sistem Informasi Ekstrakurikuler MTsN 2 Palangka Raya</h3>
                     <p class="panel-subtitle">Data Ekstrakurikuler</p>
-
-
-
                 </div>
-                <div class="panel-body"><button class="btn btn-warning" data-toggle="modal" data-target="#myModal">+ Tambah</button>
+                <div class="panel-body">
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">+ Tambah</button>
                 </div>
 
 

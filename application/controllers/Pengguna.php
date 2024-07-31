@@ -21,84 +21,46 @@ class Pengguna extends CI_Controller{
             $this->session->set_flashdata('warning',$this->message);            
             redirect('admin/pengguna');
         } else {
-            
             $query = array(
-               
                 'nama' => $this->input->post('nama'),
                 'jabatan' => $this->input->post('jabatan'),
             );
-            
             $this->crud->insert('pembina',$query);
             $this->message = "Pembina Baru Berhasil Disimpan :)";
             $this->session->set_flashdata('success',$this->message);
             redirect('admin/pengguna');
-            
         }
     }
     
-    function get($id){
-        
-        $data = array(
-            'id_siswa' => $id
-        );
-        
-        $result = $this->crud->get('siswa',$data)->row();
-        echo json_encode($result);
-        
-    }
+    public function get($id) {
+        $result = $this->crud->get('pembina', array('id_pembina' => $id))->row();
+        echo json_encode($result ?: array('error' => 'Data not found'));
+    }    
     
-    function update(){
+    public function update() {
         $this->validation();
-        if($this->form_validation->run() == FALSE){
-            $this->message = "Komponen Pengguna Wajib Diisi !";
-            $this->session->set_flashdata('warning',$this->message);            
-            redirect('admin/partisipan');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('warning', "Komponen Pengguna Wajib Diisi !");
+            redirect('admin/pengguna');
         } else {
             $query = array(
-                'username' => $this->input->post('username'),
-            
+                'nama' => $this->input->post('nama'),
+                'jabatan' => $this->input->post('jabatan'),
             );
-            
-            $this->crud->update('user',$query,'id_user',$this->input->post('id_user'));
-            $this->message = "Pengguna Berhasil Diubah :)";
-            $this->session->set_flashdata('success',$this->message);
+            $this->crud->update('pembina', $query, 'id_pembina', $this->input->post('id_pembina'));
+            $this->session->set_flashdata('success', "Pengguna Berhasil Diubah :)");
             redirect('admin/pengguna');
         }
     }
     
-    function destroy($id){
-        $this->message = "Pengguna berhasil dihapus :)";
-        $this->crud->delete('siswa','id_siswa',$id);
-        $this->session->set_flashdata('success',$this->message);
+    public function destroy($id) {
+        $this->crud->delete('pembina', 'id_pembina', $id);
+        $this->session->set_flashdata('success', "Pengguna berhasil dihapus :)");
         redirect('admin/pengguna');
-        
-    }
-    
-    function reset_password(){       
-            $old_password = $this->user->reset($this->input->post('id_user'));
-            if($old_password == sha1($this->input->post('password'))){
-                
-                $query = array(
-                    'password' => sha1($this->input->post('new_password'))
-                );
-                
-                $this->crud->update('user',$query,'id_user',$this->input->post('id_user'));
-                $this->message = 'Password berhasil diubah';
-                $this->session->set_flashdata('success',$this->message);
-                redirect('admin/pengguna');
-                
-            } else {
-                
-                $this->message = 'Password baru tidak sesuai!';
-                $this->session->set_flashdata('danger',$this->message);
-                redirect('admin/pengguna');
-            }  
     }
     
     function validation(){
         $this->form_validation->set_rules('nama','','required');
-        $this->form_validation->set_rules('jabatan','','required');
-        
+        $this->form_validation->set_rules('jabatan','','required');   
     }
-    
 }
